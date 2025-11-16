@@ -40,24 +40,6 @@ def load_and_split_docs(uploaded_file):
     # 문서를 500자 단위로 나누고, 100자 중첩(Overlapping) 적용
     splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=100)
     return splitter.split_documents(documents)
-# import tempfile
-#
-# def load_and_split_docs(uploaded_file):
-#     # 임시 파일 생성
-#     with tempfile.NamedTemporaryFile(delete=False, suffix=os.path.splitext(uploaded_file.name)[1]) as tmp:
-#         tmp.write(uploaded_file.getbuffer())
-#         tmp_path = tmp.name
-#
-#     # PDF 또는 TXT 로드시 tmp_path 사용
-#     if uploaded_file.name.endswith(".pdf"):
-#         loader = PyPDFLoader(tmp_path)
-#     else:
-#         loader = TextLoader(tmp_path, encoding="utf-8")
-#
-#     documents = loader.load()
-#
-#     splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=100)
-#     return splitter.split_documents(documents)
 
 # 4. 벡터스토어 생성 함수 (새 문서 업로드 시 최초 1회 실행)
 def create_vectorstore(docs):
